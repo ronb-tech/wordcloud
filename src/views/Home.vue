@@ -74,6 +74,7 @@ const onSelectedCategory=(category)=>{
   gap: $spacing-xl;
   align-items: center;
   justify-content: center;
+  width: 100%;
 
   .word-cloud-section {
     display: flex;

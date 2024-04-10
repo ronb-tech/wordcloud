@@ -25,5 +25,19 @@ const msgError = ref("No data available to display.");
 <style lang="scss" scoped>
 @import "@/assets/style/main.scss";
 .word-cloud {
+  margin-top: $spacing-xl;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 100%;
+  height: 100%;
+  padding: $spacing-sm;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
 }
 </style>
