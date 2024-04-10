@@ -1,15 +1,16 @@
 <template>
   <div class="home-page">
     <h1>Home page</h1>
-    <h2>{{ msg }}</h2>
+    <WordCloud></WordCloud>
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="js">
+import { computed, onMounted, ref,watch } from "vue";
 import { useStore } from "vuex";
+import WordCloud  from "@/components/WordCloud.vue";
+
 const store = useStore();
-const msg = ref("hello");
 </script>
 
 <style lang="scss" scoped>

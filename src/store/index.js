@@ -2,21 +2,19 @@ import { createStore } from "vuex";
 
 const store = createStore({
   state: {
-    count: 0,
+    userName: "",
   },
   mutations: {
-    increment(state) {
-      state.count++;
+    setUserName(state, userName) {
+      state.userName = userName;
     },
   },
   actions: {
-    increment(context) {
-      context.commit("increment");
+    initDemoUser({ commit }, payload) {
+      commit("setUserName", payload);
     },
   },
-  getters: {
-    count: (state) => state.count,
-  },
+  getters: {},
   modules: {},
 });
 
