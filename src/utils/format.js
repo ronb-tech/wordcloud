@@ -37,11 +37,15 @@ export const groupByConcept = (items) => {
     }
   });
 
-  const sortedGrouped = Object.values(grouped).sort(
-    (a, b) => b.length - a.length
+  const sortedKeys = Object.keys(grouped).sort(
+    (a, b) => grouped[b].length - grouped[a].length
   );
 
-  console.log("sortedGrouped", sortedGrouped);
+  const sortedGrouped = sortedKeys.reduce((acc, key) => {
+    acc[key] = grouped[key];
+    return acc;
+  }, {});
 
+  console.log("sortedGrouped", sortedGrouped);
   return sortedGrouped;
 };
