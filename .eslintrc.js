@@ -1,18 +1,21 @@
 module.exports = {
-  root: true,
   env: {
-    node: true,
+    browser: true,
+    es2021: true,
   },
-  extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-  ],
+  extends: "plugin:vue/essential",
   parserOptions: {
-    parser: "@babel/eslint-parser",
+    ecmaVersion: 12,
+    parser: "@typescript-eslint/parser",
+    sourceType: "module",
   },
+  plugins: ["vue", "@typescript-eslint"],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "comma-spacing": "off",
+    "space-infix-ops": "off",
+    "no-multiple-template-root": "off",
+    "multi-word-component-names": "off",
+    "vue/multi-word-component-names": "off",
+    "vue/no-multiple-template-root": "off",
   },
 };
