@@ -92,6 +92,11 @@ const onSelectedCategory=(category)=>{
       text-decoration: underline;
       text-transform: capitalize;
       font-size: $font-size-sm;
+      span {
+        &.active {
+          color: $color-primary;
+        }
+      }
     }
   }
 }
