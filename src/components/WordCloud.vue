@@ -3,8 +3,8 @@
     <div v-if="wordCloudData && wordCloudData.length > 0">
       <h2>WordCloud: {{ catagoryName }}</h2>
 
-      <div v-for="(item, index) in wordCloudData" :key="index">
-        {{ item }}
+      <div v-for="item in wordCloudData" :key="item.id">
+        {{ item?.title }}
       </div>
     </div>
     <div v-else>{{ msgError }}</div>
@@ -13,6 +13,7 @@
 
 <script setup>
 import { defineProps, ref, computed } from "vue";
+import { transformedArray } from "@/utils/format.js";
 
 const props = defineProps({
   data: {
@@ -26,8 +27,10 @@ const props = defineProps({
 });
 
 const wordCloudData = computed(() => {
-  console.log("props.data", wordCloudData);
-  return props.data;
+  const transformedData = transformedArray(props.data);
+  console.log("props.data", transformedData);
+
+  return transformedData.length > 0 ? transformedData : [];
 });
 const msgError = ref("No data available to display.");
 </script>

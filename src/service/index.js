@@ -1,6 +1,7 @@
 import data1 from "@/service/data/data1.json";
 import data2 from "@/service/data/data2.json";
 import data3 from "@/service/data/data3.json";
+import { getConcept } from "@/utils/format.js";
 
 const demoFetch = (fileData, delay = 1000) => {
   return new Promise((resolve, reject) => {
@@ -41,7 +42,7 @@ const groupBy = (items) => {
   items.forEach((item) => {
     const entityConceptObj = item.values.find((v) => v.key === "entityConcept");
     if (entityConceptObj) {
-      const concept = entityConceptObj.value.split("#")[1] || "unknown";
+      const concept = getConcept(entityConceptObj.value);
       if (!grouped[concept]) {
         grouped[concept] = [];
       }
