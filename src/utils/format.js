@@ -1,7 +1,7 @@
 const keyMappings = {
-  entityTitle: "title",
+  entityTitle: "text",
   count: "count",
-  entityId: "id",
+  entityId: "name",
   entityConcept: "concept",
 };
 
@@ -22,4 +22,26 @@ export const transformedArray = (data) => {
   return data?.map((item) => {
     return transformArrayToObject(item?.values);
   });
+};
+
+export const groupByConcept = (items) => {
+  const grouped = {};
+  items.forEach((item) => {
+    const entityConceptObj = item.values.find((v) => v.key === "entityConcept");
+    if (entityConceptObj) {
+      const concept = getConcept(entityConceptObj.value);
+      if (!grouped[concept]) {
+        grouped[concept] = [];
+      }
+      grouped[concept].push(item);
+    }
+  });
+
+  const sortedGrouped = Object.values(grouped).sort(
+    (a, b) => b.length - a.length
+  );
+
+  console.log("sortedGrouped", sortedGrouped);
+
+  return sortedGrouped;
 };

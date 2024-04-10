@@ -1,19 +1,18 @@
 <template>
   <div class="word-cloud">
-    <div v-if="wordCloudData && wordCloudData.length > 0">
-      <h2>WordCloud: {{ catagoryName }}</h2>
+    <h2>WordCloud: {{ catagoryName }}</h2>
 
-      <div v-for="item in wordCloudData" :key="item.id">
-        {{ item?.title }}
-      </div>
+    <div v-if="wordCloudData && wordCloudData.length > 0">
+      <div id="canvas-word-cloud"></div>
     </div>
     <div v-else>{{ msgError }}</div>
   </div>
 </template>
 
 <script setup>
-import { defineProps, ref, computed } from "vue";
+import { defineProps, ref, computed, onMounted } from "vue";
 import { transformedArray } from "@/utils/format.js";
+import { Chart } from "@antv/g2";
 
 const props = defineProps({
   data: {
@@ -25,6 +24,7 @@ const props = defineProps({
     default: "",
   },
 });
+const msgError = ref("No data available to display.");
 
 const wordCloudData = computed(() => {
   const transformedData = transformedArray(props.data);
@@ -32,7 +32,25 @@ const wordCloudData = computed(() => {
 
   return transformedData.length > 0 ? transformedData : [];
 });
-const msgError = ref("No data available to display.");
+
+onMounted(() => {
+  const chart = new Chart({
+    container: "canvas-word-cloud",
+    autoFit: true,
+    paddingTop: 40,
+  });
+
+  chart
+    .wordCloud()
+    .data(wordCloudData.value)
+    .layout({
+      spiral: "rectangular",
+    })
+
+    .encode("color", "text");
+
+  chart.render();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -48,9 +66,16 @@ const msgError = ref("No data available to display.");
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: $spacing-md;
 
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  #canvas-word-cloud {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

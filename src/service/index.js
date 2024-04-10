@@ -1,7 +1,7 @@
 import data1 from "@/service/data/data1.json";
 import data2 from "@/service/data/data2.json";
 import data3 from "@/service/data/data3.json";
-import { getConcept } from "@/utils/format.js";
+import { getConcept, groupByConcept } from "@/utils/format.js";
 
 const demoFetch = (fileData, delay = 1000) => {
   return new Promise((resolve, reject) => {
@@ -31,23 +31,8 @@ export const getWordCloudData = async () => {
         console.error("Error fetching data:", result.reason);
       }
     });
-    const groupByData = groupBy(combinedData);
+    const groupByData = groupByConcept(combinedData);
 
     return groupByData;
   });
-};
-
-const groupBy = (items) => {
-  const grouped = {};
-  items.forEach((item) => {
-    const entityConceptObj = item.values.find((v) => v.key === "entityConcept");
-    if (entityConceptObj) {
-      const concept = getConcept(entityConceptObj.value);
-      if (!grouped[concept]) {
-        grouped[concept] = [];
-      }
-      grouped[concept].push(item);
-    }
-  });
-  return grouped;
 };
