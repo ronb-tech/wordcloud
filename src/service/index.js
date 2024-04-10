@@ -3,10 +3,10 @@ import data2 from "@/service/data/data2.json";
 import data3 from "@/service/data/data3.json";
 
 const demoFetch = (fileData, delay = 1000) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (!fileData) {
-        reject(`fileData is required to fetch`);
+        reject(new Error(`fileData is required to fetch`));
       } else {
         resolve(fileData);
       }
@@ -21,14 +21,12 @@ export const getWordCloudData = async () => {
     demoFetch(data3, 1500),
   ];
   return Promise.allSettled(filePromises).then((results) => {
-    const combinedData = [];
-    let hadError = false;
-
+    let combinedData = [];
     results.forEach((result) => {
+      console.log("res", result);
       if (result.status === "fulfilled") {
-        combinedData.push({ ...result.value });
+        combinedData = [...combinedData, ...result.value.items];
       } else {
-        hadError = true;
         console.error("Error fetching data:", result.reason);
       }
     });
