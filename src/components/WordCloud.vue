@@ -1,6 +1,12 @@
 <template>
   <div class="word-cloud">
-    <div v-if="wordCloudData && wordCloudData.length > 0"></div>
+    <div v-if="wordCloudData && wordCloudData.length > 0">
+      <h2>WordCloud: {{ catagoryName }}</h2>
+
+      <div v-for="(item, index) in wordCloudData" :key="index">
+        {{ item }}
+      </div>
+    </div>
     <div v-else>{{ msgError }}</div>
   </div>
 </template>
@@ -12,6 +18,10 @@ const props = defineProps({
   data: {
     type: Array,
     default: () => [],
+  },
+  catagoryName: {
+    type: String,
+    default: "",
   },
 });
 

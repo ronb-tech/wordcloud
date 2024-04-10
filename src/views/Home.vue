@@ -8,11 +8,15 @@
           :key="category"
           @click="onSelectedCategory(category)"
           :class="{ active: category === selectedCategory }"
+          tabindex="0"
         >
           {{ category }}
         </span>
       </div>
-      <WordCloud :data="filteredData"></WordCloud>
+      <WordCloud
+        :data="filteredData"
+        :catagoryName="selectedCategory"
+      ></WordCloud>
     </div>
 
     <div v-if="loading">
@@ -39,8 +43,8 @@ const categories = ref([]);
 
 const filteredData = computed(() => {
   if (!selectedCategory.value) return wordCloudData.value;
-  //return wordCloudData.value.filter(item => Object.key(item) === selectedCategory.value);
-  return wordCloudData.value
+  const matchingKey = Object.keys(wordCloudData.value).find(key => key === selectedCategory.value);
+  return wordCloudData.value[matchingKey]||[];
 });
 
 onMounted(async () => {
@@ -50,7 +54,6 @@ onMounted(async () => {
     if(wordCloudData.value){
       categories.value= Object.keys(wordCloudData.value);
       selectedCategory.value= categories.value[0];
-
     }
     loading.value = false;
   } catch (e) {
@@ -61,7 +64,6 @@ onMounted(async () => {
 });
 
 const onSelectedCategory=(category)=>{
-  console.log("Selected category", category);
   selectedCategory.value = category
 }
 </script>

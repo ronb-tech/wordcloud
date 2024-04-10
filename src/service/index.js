@@ -31,7 +31,6 @@ export const getWordCloudData = async () => {
       }
     });
     const groupByData = groupBy(combinedData);
-    console.log("combinedData", groupByData);
 
     return groupByData;
   });
@@ -39,7 +38,6 @@ export const getWordCloudData = async () => {
 
 const groupBy = (items) => {
   const grouped = {};
-
   items.forEach((item) => {
     const entityConceptObj = item.values.find((v) => v.key === "entityConcept");
     if (entityConceptObj) {
