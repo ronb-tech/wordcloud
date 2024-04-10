@@ -10,9 +10,10 @@
 </template>
 
 <script setup>
-import { defineProps, ref, computed, onMounted } from "vue";
+import { defineProps, ref, computed, onMounted, watch } from "vue";
 import { transformedArray } from "@/utils/format.js";
 import { Chart } from "@antv/g2";
+let chart;
 
 const props = defineProps({
   data: {
@@ -34,23 +35,41 @@ const wordCloudData = computed(() => {
 });
 
 onMounted(() => {
-  const chart = new Chart({
-    container: "canvas-word-cloud",
-    autoFit: true,
-    paddingTop: 40,
-  });
-
-  chart
-    .wordCloud()
-    .data(wordCloudData.value)
-    .layout({
-      spiral: "rectangular",
-    })
-
-    .encode("color", "text");
-
-  chart.render();
+  initGraph();
 });
+
+const initGraph = () => {
+  if (chart) {
+    chart.clear();
+  } else {
+    const chart = new Chart({
+      container: "canvas-word-cloud",
+      autoFit: true,
+      paddingTop: 40,
+    });
+
+    chart
+      .wordCloud()
+      .data(wordCloudData.value)
+      .layout({
+        spiral: "rectangular",
+      })
+
+      .encode("color", "text");
+
+    chart.render();
+  }
+};
+
+watch(
+  () => props.data,
+  (newVal, oldVal) => {
+    if (newVal !== oldVal) {
+      initGraph();
+    }
+  },
+  { deep: true }
+);
 </script>
 
 <style lang="scss" scoped>
