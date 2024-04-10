@@ -11,7 +11,7 @@
 
 <script setup>
 import { defineProps, ref, computed, onMounted, watch } from "vue";
-import { transformedArray } from "@/utils/format.js";
+import { transformedArray, configGraph } from "@/utils/format.js";
 import { Chart } from "@antv/g2";
 let chart;
 
@@ -54,8 +54,9 @@ const initGraph = () => {
       .layout({
         spiral: "rectangular",
       })
-
       .encode("color", "text");
+
+    configGraph();
 
     chart.render();
   }

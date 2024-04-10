@@ -5,6 +5,48 @@ const keyMappings = {
   entityConcept: "concept",
 };
 
+export const configGraph = () => {
+  return {
+    wordStyle: {
+      rotation: [-Math.PI / 2, Math.PI / 2],
+      rotateRatio: 0.5,
+      rotationSteps: 4,
+      fontSize: [10, 60],
+      color: (name, count) => {
+        return getRandomColor();
+      },
+      active: {
+        shadowColor: "#333333",
+        shadowBlur: 10,
+      },
+      gridSize: 8,
+    },
+    shape: "cardioid",
+    shuffle: false,
+    backgroundColor: "#fff",
+    tooltip: {
+      visible: true,
+    },
+    selected: -1,
+  };
+};
+
+const getRandomColor = () => {
+  const arr = [
+    "#5B8FF9",
+    "#5AD8A6",
+    "#5D7092",
+    "#F6BD16",
+    "#E8684A",
+    "#6DC8EC",
+    "#9270CA",
+    "#FF9D4D",
+    "#269A99",
+    "#FF99C3",
+  ];
+  return arr[Math.floor(Math.random() * (arr.length - 1))];
+};
+
 const transformArrayToObject = (array) => {
   return array.reduce((acc, { key, value }) => {
     if (keyMappings[key]) {
