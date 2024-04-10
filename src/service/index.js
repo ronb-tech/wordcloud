@@ -30,7 +30,25 @@ export const getWordCloudData = async () => {
         console.error("Error fetching data:", result.reason);
       }
     });
-    console.log("combinedData", combinedData);
-    return combinedData;
+    const groupByData = groupBy(combinedData);
+    console.log("combinedData", groupByData);
+
+    return groupByData;
   });
+};
+
+const groupBy = (items) => {
+  const grouped = {};
+
+  items.forEach((item) => {
+    const entityConceptObj = item.values.find((v) => v.key === "entityConcept");
+    if (entityConceptObj) {
+      const concept = entityConceptObj.value.split("#")[1] || "unknown";
+      if (!grouped[concept]) {
+        grouped[concept] = [];
+      }
+      grouped[concept].push(item);
+    }
+  });
+  return grouped;
 };

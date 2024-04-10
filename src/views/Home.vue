@@ -1,10 +1,10 @@
 <template>
   <div class="home-page">
     <h1>Home page</h1>
-    <WordCloud
-      v-if="!loading && !error && wordCloudData"
-      :data="wordCloudData"
-    ></WordCloud>
+    <div v-if="!loading && !error && wordCloudData">
+      <WordCloud :data="wordCloudData"></WordCloud>
+    </div>
+
     <div v-if="loading">
       <img :src="require('@/assets/loader.gif')" alt="Loading..." />
     </div>
