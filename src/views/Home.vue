@@ -9,8 +9,13 @@
 import { computed, onMounted, ref,watch } from "vue";
 import { useStore } from "vuex";
 import WordCloud  from "@/components/WordCloud.vue";
+import {getWordCloudData} from "@/service/index.js";
 
 const store = useStore();
+const wordCloudData=ref(null);
+onMounted(() => {
+  wordCloudData.value=getWordCloudData();
+});
 </script>
 
 <style lang="scss" scoped>
