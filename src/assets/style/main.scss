@@ -1,0 +1,77 @@
+@import "./variables.scss";
+
+body {
+    margin: 0;
+}
+
+.app-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: auto;
+    min-height: calc(100vh - 372px);
+    padding: $spacing-xxl;
+    color: $color-black;
+    text-align: center;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-black;
+    color: $color-white;
+    width: auto;
+    height: $footer-height;
+    padding: $spacing-md;
+    color: $color-white;
+    gap: $spacing-md;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    height: $header-height;
+    align-items: center;
+    background-color: $color-primary;
+    color: $color-white;
+    padding: $spacing-lg;
+    font-size: $font-size-lg;
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $spacing-lg;
+        gap: $spacing-lg;
+
+        a {
+            cursor: pointer;
+            color: $color-light;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-xl) {
+    .app-main {
+        font-size: $font-size-sm;
+    }
+}
+
+@media (max-width: $breakpoint-md) {
+
+    h2,
+    h1 {
+        font-size: 20px;
+    }
+
+    .app-main {
+        font-size: $font-size-sm;
+    }
+}
