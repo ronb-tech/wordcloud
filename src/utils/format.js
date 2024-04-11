@@ -1,34 +1,34 @@
 const keyMappings = {
   entityTitle: "text",
-  count: "count",
-  entityId: "name",
+  count: "weight",
+  entityId: "id",
   entityConcept: "concept",
 };
 
-export const configGraph = () => {
-  return {
-    wordStyle: {
-      rotation: [-Math.PI / 2, Math.PI / 2],
-      rotateRatio: 0.5,
-      rotationSteps: 4,
-      fontSize: [10, 60],
-      color: (name, count) => {
-        return getRandomColor();
-      },
-      active: {
-        shadowColor: "#333333",
-        shadowBlur: 10,
-      },
-      gridSize: 8,
+export const configGraph = {
+  wordField: "text",
+  weightField: "weight",
+  wordStyle: {
+    rotation: [-Math.PI / 2, Math.PI / 2],
+    rotateRatio: 0.5,
+    rotationSteps: 4,
+    fontSize: [10, 60],
+    color: (name, weight) => {
+      return getRandomColor();
     },
-    shape: "cardioid",
-    shuffle: false,
-    backgroundColor: "#fff",
-    tooltip: {
-      visible: true,
+    active: {
+      shadowColor: "#333333",
+      shadowBlur: 10,
     },
-    selected: -1,
-  };
+    gridSize: 8,
+  },
+  shape: "cardioid",
+  shuffle: false,
+  backgroundColor: "#fff",
+  tooltip: {
+    visible: true,
+  },
+  selected: -1,
 };
 
 const getRandomColor = () => {

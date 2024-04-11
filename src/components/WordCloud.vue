@@ -1,12 +1,9 @@
 <template>
-  <div class="word-cloud">
-    <h2>WordCloud: {{ catagoryName }}</h2>
-
-    <div v-if="wordCloudData && wordCloudData.length > 0">
-      <div id="canvas-word-cloud"></div>
-    </div>
-    <div v-else>{{ msgError }}</div>
+  <div class="word-cloud" v-if="wordCloudData && wordCloudData.length > 0">
+    <h2>WordCloud: {{ catagoryName }}({{ wordCloudData.length }})</h2>
+    <div id="canvas-word-cloud"></div>
   </div>
+  <div v-else>{{ msgError }}</div>
 </template>
 
 <script setup>
@@ -49,16 +46,13 @@ const initGraph = () => {
     });
 
     chart
-      .wordCloud()
       .data(wordCloudData.value)
-      .layout({
-        spiral: "rectangular",
-      })
+      .wordCloud(configGraph)
       .encode("color", "text");
 
-    configGraph();
-
     chart.render();
+
+    console.log("chart", chart);
   }
 };
 
