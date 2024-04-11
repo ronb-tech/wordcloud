@@ -90,13 +90,15 @@ const onSelectedCategory=(category)=>{
       gap: $spacing-lg;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: underline;
-      text-transform: capitalize;
-      font-size: $font-size-sm;
+
       span {
         width: 100%;
+        font-size: $font-size-sm;
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration: underline;
+        text-transform: capitalize;
+        font-size: $font-size-sm;
         &.active {
           color: $color-primary;
         }
@@ -107,9 +109,7 @@ const onSelectedCategory=(category)=>{
     .tabs {
       width: 350px;
       height: auto;
-      span {
-        font-size: $font-size-xs;
-      }
+      flex-direction: column;
     }
   }
 }
