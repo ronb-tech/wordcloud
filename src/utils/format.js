@@ -1,21 +1,16 @@
 const keyMappings = {
   entityTitle: "text",
-  count: "weight",
+  count: "value",
   entityId: "id",
   entityConcept: "concept",
 };
 
 export const configGraph = {
   wordField: "text",
-  weightField: "weight",
+  weightField: "value",
   wordStyle: {
-    rotation: [-Math.PI / 2, Math.PI / 2],
-    rotateRatio: 0.5,
     rotationSteps: 4,
-    fontSize: [10, 60],
-    color: (name, weight) => {
-      return getRandomColor();
-    },
+    fontSize: [10, 100],
     active: {
       shadowColor: "#333333",
       shadowBlur: 10,
@@ -29,22 +24,6 @@ export const configGraph = {
     visible: true,
   },
   selected: -1,
-};
-
-const getRandomColor = () => {
-  const arr = [
-    "#5B8FF9",
-    "#5AD8A6",
-    "#5D7092",
-    "#F6BD16",
-    "#E8684A",
-    "#6DC8EC",
-    "#9270CA",
-    "#FF9D4D",
-    "#269A99",
-    "#FF99C3",
-  ];
-  return arr[Math.floor(Math.random() * (arr.length - 1))];
 };
 
 const transformArrayToObject = (array) => {

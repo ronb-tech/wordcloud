@@ -70,11 +70,11 @@ watch(
 <style lang="scss" scoped>
 @import "@/assets/style/main.scss";
 .word-cloud {
+  width: 100%;
+  height: auto;
   margin-top: $spacing-xl;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 100%;
-  height: 100%;
   padding: $spacing-sm;
   min-height: 400px;
   display: flex;
