@@ -96,9 +96,19 @@ const onSelectedCategory=(category)=>{
       text-transform: capitalize;
       font-size: $font-size-sm;
       span {
+        width: 100%;
         &.active {
           color: $color-primary;
         }
+      }
+    }
+  }
+  @media (max-width: $breakpoint-md) {
+    .tabs {
+      width: 350px;
+      height: auto;
+      span {
+        font-size: $font-size-xs;
       }
     }
   }

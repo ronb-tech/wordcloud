@@ -10,6 +10,8 @@
 import { defineProps, ref, computed, onMounted, watch } from "vue";
 import { transformedArray, configGraph } from "@/utils/format.js";
 import { Chart } from "@antv/g2";
+const windowWidth = ref(window.innerWidth);
+
 let chart;
 
 const props = defineProps({
@@ -32,10 +34,11 @@ const wordCloudData = computed(() => {
 });
 
 onMounted(() => {
-  initGraph();
+  const initGridSize = windowWidth.value <= 768 ? 4 : 8;
+  initGraph(initGridSize);
 });
 
-const initGraph = () => {
+const initGraph = (gridSize) => {
   if (chart) {
     chart.clear();
   } else {
@@ -47,7 +50,7 @@ const initGraph = () => {
 
     chart
       .data(wordCloudData.value)
-      .wordCloud(configGraph)
+      .wordCloud(configGraph(gridSize))
       .encode("color", "text");
 
     chart.render();
@@ -90,6 +93,13 @@ watch(
   #canvas-word-cloud {
     width: 100%;
     height: 100%;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .word-cloud {
+    width: 350px;
+    height: auto;
   }
 }
 </style>

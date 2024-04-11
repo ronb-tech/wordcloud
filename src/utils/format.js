@@ -5,25 +5,27 @@ const keyMappings = {
   entityConcept: "concept",
 };
 
-export const configGraph = {
-  wordField: "text",
-  weightField: "value",
-  wordStyle: {
-    rotationSteps: 4,
-    fontSize: [10, 100],
-    active: {
-      shadowColor: "#333333",
-      shadowBlur: 10,
+export const configGraph = (gridSize) => {
+  return {
+    wordField: "text",
+    weightField: "value",
+    wordStyle: {
+      rotationSteps: 4,
+      fontSize: [10, 100],
+      active: {
+        shadowColor: "#333333",
+        shadowBlur: 10,
+      },
+      gridSize: gridSize,
     },
-    gridSize: 8,
-  },
-  shape: "cardioid",
-  shuffle: false,
-  backgroundColor: "#fff",
-  tooltip: {
-    visible: true,
-  },
-  selected: -1,
+    shape: "cardioid",
+    shuffle: false,
+    backgroundColor: "#fff",
+    tooltip: {
+      visible: true,
+    },
+    selected: -1,
+  };
 };
 
 const transformArrayToObject = (array) => {
